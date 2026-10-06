@@ -45,6 +45,32 @@ void put_string(const char *str){
         put_char(str[i]);
     }
 }
+
+void put_int(int n){
+    char buffer[12]; //12 is enough for any 32-bit int (10 digits, a sign, and a spare).
+    int count = 0;
+    unsigned int u;
+
+    if(n == 0){
+        put_char('0');
+        return;
+    }
+    if(n < 0){
+        put_char('-');
+        u = 0u - (unsigned int)n;
+    } else{
+        u = (unsigned int)n;
+    }
+    while(u > 0){
+        buffer[count] = (n % 10) + '0';
+        count++;
+        n /= 10;
+    }
+    for(int i = count - 1; i >= 0; i--){
+        put_char(buffer[i]);
+    }
+}
+
 int strlen(const char *str){
     int count = 0;
     for(int i = 0; str[i] != '\0'; i++){
