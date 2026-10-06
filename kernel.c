@@ -41,14 +41,18 @@ void put_char(const char c){
 }
 
 void put_string(const char *str){
-    for(int i = 0; str[i] != '\0'; i++){
+    for(int i = 0; i < strlen(str); i++){ //or for(int i = 0; str[i] != '\0'; i++){
         put_char(str[i]);
     }
+}
+int strlen(const char *str){
+    int count = 0;
+    for(int i = 0; str[i] != '\0'; i++){
+        count++;
+    }
+    return count;
 }
 
 void kernel_main(void){
     clear_screen();
-    for(int i = 0; i < 40; i++){
-        put_string("Hello Kernel!\n");  
-    }
 }
