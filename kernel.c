@@ -76,6 +76,28 @@ int strlen(const char *str){
     return count;
 }
 
+void put_hex(unsigned int n){
+    char buffer[8];
+    int count = 0;
+    put_string("0x");
+
+    while(n > 0){
+        int digit = n % 16; 
+        if(n % 16 >= 10){
+            buffer[count++] = 'A' - 10 + digit;
+        } else{
+            buffer[count++] = '0' + digit;
+        }
+        n/= 16;
+    }
+    for(int i = 0; i < 8 - count; i++){
+        put_char('0');
+    }
+    for(int i = count - 1; i >= 0; i--){
+        put_char(buffer[i]);
+    }
+}
+
 void put_string(const char *str){
     for(int i = 0; str[i] != '\0'; i++){ //or for(int i = 0; strlen(str); i++){
         put_char(str[i]);
@@ -94,4 +116,8 @@ void kernel_main(void){
     put_char('\n');
     put_int(-2147483647 - 1); 
     put_char('\n');
+    put_hex(0xB8000);  put_char('\n');
+put_hex(255);      put_char('\n');
+put_hex(0);        put_char('\n');
+put_hex(0u - 1);   put_char('\n');
 }
